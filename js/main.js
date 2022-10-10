@@ -1,5 +1,4 @@
 
-
 function getRandomInt(min, max) {
   if (isNaN(min) || isNaN(max)) {
     return 'NaN'
