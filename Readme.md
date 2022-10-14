@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Amir Farkhadov](https://up.htmlacademy.ru/javascript/27/user/853355).
-* Наставник: [Владимир Якушкин] (https://htmlacademy.ru/profile/id126208)
+* Наставник: [Александр Бабченко] (https://htmlacademy.ru/profile/babtshe)
 
 ---
 
