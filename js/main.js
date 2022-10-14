@@ -61,12 +61,6 @@ function getRandomInt(min, max) {
     return NaN;
   }
 
-  if (max <= min) {
-    let swap = max;
-    max = min;
-    min = swap;
-  }
-
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -102,7 +96,6 @@ const createPost = () => ({
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
 
-getRandomInt(6, 3);
 checkStringLength('', 5);
 getPosts();
 
