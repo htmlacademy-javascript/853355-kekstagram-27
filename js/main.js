@@ -65,25 +65,22 @@ function getRandomInt(min, max) {
     let swap = max;
     max = min;
     min = swap;
-  };
-
-  const lower = Math.ceil(Math.min(min, max));
-  const upper = Math.floor(Math.max(min, max));
+  }
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const getRandomArrayElement = (elements) => (
   elements[getRandomInt(0, elements.length - 1)]
-)
+);
 
 function checkStringLength (input, maxLength) {
   return input.length <= maxLength;
 }
 
 const createCommentMessage = () =>
-   Array.from({length: getRandomInt(COMMENTS_MESSAGE_RANGE.min, COMMENTS_MESSAGE_RANGE.max)},
-   () => getRandomArrayElement(COMMENTS)).join(' ');
+  Array.from({length: getRandomInt(COMMENTS_MESSAGE_RANGE.min, COMMENTS_MESSAGE_RANGE.max)},
+    () => getRandomArrayElement(COMMENTS)).join(' ');
 
 const createComment = () => ({
   id: getRandomInt(ID_RANGE.min, ID_RANGE.max),
@@ -102,12 +99,10 @@ const createPost = () => ({
   name:getRandomArrayElement(USER_NAMES),
 });
 
-const getPosts = () =>
- Array.from(
-  {length: POSTS_COUNT}, () => createPost()
-);
+const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
 
-checkStringLength();
+getRandomInt(6, 3);
+checkStringLength('', 5);
 getPosts();
 
