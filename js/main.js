@@ -6,10 +6,10 @@ const AVATAR_RANGE = {
   max: 6
 };
 const POSTS_COUNT = 25;
-const PHOTO_RANGE = {
-  min: 1,
-  max: 25
-};
+// const PHOTO_RANGE = {
+//   min: 1,
+//   max: 25
+// };
 
 const COMMENTS_MESSAGE_RANGE = {
   min: 1,
@@ -26,10 +26,10 @@ const LIKES_RANGE = {
   max: 200
 };
 
-const ID_RANGE = {
-  min: 1,
-  max: 25
-};
+// const ID_RANGE = {
+//   min: 1,
+//   max: 25
+// };
 
 const COMMENTS = [
   'Всё отлично!',
@@ -95,15 +95,15 @@ const getCommentMessage = () =>
   Array.from({length: getRandomInt(COMMENTS_MESSAGE_RANGE.min, COMMENTS_MESSAGE_RANGE.max)},
     () => getRandomArrayElement(COMMENTS)).join(' ');
 
-const createComment = () =>  ({
-  id: getUniqueID(isComment = true),
+const createComment = () => ({
+  id: getUniqueID(true),
   avatar: `img/avatar-${getRandomInt(AVATAR_RANGE.min, AVATAR_RANGE.max)}.svg`,
   message: getCommentMessage(),
   name: getRandomArrayElement(USER_NAMES)
 });
 
 const createPost = () => ({
-  id: getUniqueID(isComment = false),
+  id: getUniqueID(false),
   url: `photos/${currentUserID}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInt(LIKES_RANGE.min, LIKES_RANGE.max),
