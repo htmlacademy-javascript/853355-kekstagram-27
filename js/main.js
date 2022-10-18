@@ -79,10 +79,7 @@ function getUniqueID() {
   return currentUserID;
 }
 
-function getCommentID() {
-  currentCommentID++;
-  return currentCommentID;
-}
+const getCommentID = () => currentCommentID++;
 
 function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
@@ -111,6 +108,6 @@ const createPost = () => ({
 
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
-isInputLengthOk('', 5);
-getPosts();
+console.log(isInputLengthOk('', 5));
+console.log(getPosts());
 
