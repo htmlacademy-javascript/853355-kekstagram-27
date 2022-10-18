@@ -108,6 +108,6 @@ const createPost = () => ({
 
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
-console.log(isInputLengthOk('', 5));
-console.log(getPosts());
+isInputLengthOk('', 5);
+getPosts();
 
