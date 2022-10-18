@@ -79,10 +79,7 @@ function getUniqueID() {
   return currentUserID;
 }
 
-function getCommentID() {
-  currentCommentID++;
-  return currentCommentID;
-}
+const getCommentID = () => currentCommentID++;
 
 function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
