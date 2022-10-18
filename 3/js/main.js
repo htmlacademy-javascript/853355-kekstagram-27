@@ -6,10 +6,6 @@ const AVATAR_RANGE = {
   max: 6
 };
 const POSTS_COUNT = 25;
-// const PHOTO_RANGE = {
-//   min: 1,
-//   max: 25
-// };
 
 const COMMENTS_MESSAGE_RANGE = {
   min: 1,
@@ -25,11 +21,6 @@ const LIKES_RANGE = {
   min: 15,
   max: 200
 };
-
-// const ID_RANGE = {
-//   min: 1,
-//   max: 25
-// };
 
 const COMMENTS = [
   'Всё отлично!',
