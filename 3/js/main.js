@@ -1,12 +1,15 @@
+let currentCommentID = 0;
+let currentUserID = 0;
+
 const AVATAR_RANGE = {
   min: 1,
   max: 6
 };
 const POSTS_COUNT = 25;
-const PHOTO_RANGE = {
-  min: 1,
-  max: 25
-};
+// const PHOTO_RANGE = {
+//   min: 1,
+//   max: 25
+// };
 
 const COMMENTS_MESSAGE_RANGE = {
   min: 1,
@@ -23,10 +26,10 @@ const LIKES_RANGE = {
   max: 200
 };
 
-const ID_RANGE = {
-  min: 1,
-  max: 25
-};
+// const ID_RANGE = {
+//   min: 1,
+//   max: 25
+// };
 
 const COMMENTS = [
   'Всё отлично!',
@@ -68,24 +71,40 @@ const getRandomArrayElement = (elements) => (
   elements[getRandomInt(0, elements.length - 1)]
 );
 
-function checkStringLength (input, maxLength) {
+function getUniqueID(isComment) {
+  if (isComment) {
+    if (currentCommentID >= 25) {
+      currentCommentID = 0;
+    }
+    currentCommentID++;
+    return currentCommentID;
+  } else {
+    if (currentUserID > 25) {
+      currentUserID = 0;
+    }
+    currentUserID++;
+    return currentUserID;
+  }
+}
+
+function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
 }
 
-const createCommentMessage = () =>
+const getCommentMessage = () =>
   Array.from({length: getRandomInt(COMMENTS_MESSAGE_RANGE.min, COMMENTS_MESSAGE_RANGE.max)},
     () => getRandomArrayElement(COMMENTS)).join(' ');
 
 const createComment = () => ({
-  id: getRandomInt(ID_RANGE.min, ID_RANGE.max),
+  id: getUniqueID(true),
   avatar: `img/avatar-${getRandomInt(AVATAR_RANGE.min, AVATAR_RANGE.max)}.svg`,
-  message: createCommentMessage(),
+  message: getCommentMessage(),
   name: getRandomArrayElement(USER_NAMES)
 });
 
 const createPost = () => ({
-  id: getRandomInt(PHOTO_RANGE.min, PHOTO_RANGE.max),
-  url: `photos/${getRandomInt(PHOTO_RANGE.min, PHOTO_RANGE.max)}.jpg`,
+  id: getUniqueID(false),
+  url: `photos/${currentUserID}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInt(LIKES_RANGE.min, LIKES_RANGE.max),
   comments: Array.from({length: getRandomInt(COMMENTS_RANGE.min, COMMENTS_RANGE.max)}, () => createComment()),
@@ -95,7 +114,6 @@ const createPost = () => ({
 
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
-
-checkStringLength('', 5);
+isInputLengthOk('', 5);
 getPosts();
 
