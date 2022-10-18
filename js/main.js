@@ -71,20 +71,17 @@ const getRandomArrayElement = (elements) => (
   elements[getRandomInt(0, elements.length - 1)]
 );
 
-function getUniqueID(isComment) {
-  if (isComment) {
-    if (currentCommentID >= 25) {
-      currentCommentID = 0;
-    }
-    currentCommentID++;
-    return currentCommentID;
-  } else {
-    if (currentUserID > 25) {
-      currentUserID = 0;
-    }
-    currentUserID++;
-    return currentUserID;
+function getUniqueID() {
+  if (currentUserID > 25) {
+    currentUserID = 0;
   }
+  currentUserID++;
+  return currentUserID;
+}
+
+function getCommentID() {
+  currentCommentID++;
+  return currentCommentID;
 }
 
 function isInputLengthOk (input, maxLength) {
@@ -96,14 +93,14 @@ const getCommentMessage = () =>
     () => getRandomArrayElement(COMMENTS)).join(' ');
 
 const createComment = () => ({
-  id: getUniqueID(true),
+  id: getCommentID(),
   avatar: `img/avatar-${getRandomInt(AVATAR_RANGE.min, AVATAR_RANGE.max)}.svg`,
   message: getCommentMessage(),
   name: getRandomArrayElement(USER_NAMES)
 });
 
 const createPost = () => ({
-  id: getUniqueID(false),
+  id: getUniqueID(),
   url: `photos/${currentUserID}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInt(LIKES_RANGE.min, LIKES_RANGE.max),
@@ -114,6 +111,6 @@ const createPost = () => ({
 
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
-isInputLengthOk('', 5);
-getPosts();
+console.log(isInputLengthOk('', 5));
+console.log(getPosts());
 
