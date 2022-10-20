@@ -63,7 +63,7 @@ const createComment = () => ({
 
 const createPost = () => ({
   id: getUniqueID(),
-  url: `photos/${currentUserID}.jpg`,
+  url: `photos/${currentUserID}.jpg`, //read-only
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInt(LIKES_RANGE.min, LIKES_RANGE.max),
   comments: Array.from({length: getRandomInt(COMMENTS_RANGE.min, COMMENTS_RANGE.max)}, () => createComment()),
