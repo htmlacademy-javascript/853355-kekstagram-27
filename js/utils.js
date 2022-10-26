@@ -23,8 +23,6 @@ const getRandomArrayElement = (elements) => (
   elements[getRandomInt(0, elements.length - 1)]
 );
 
-
-
 function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
 }

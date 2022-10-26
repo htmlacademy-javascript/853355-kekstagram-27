@@ -1,9 +1,9 @@
-import { getPosts } from "./data.js";
+import { getPosts } from './data.js';
 
 const usersPosts = document.querySelector('.pictures');
 const userPostTemplate = document.querySelector('#picture')
-.content
-.querySelector('.picture');
+  .content
+  .querySelector('.picture');
 
 const usersPostsData = getPosts();
 
