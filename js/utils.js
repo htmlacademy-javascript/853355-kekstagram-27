@@ -2,7 +2,7 @@ let currentCommentID = 0;
 let currentUserID = 0;
 
 function getUniqueID() {
-  if (currentUserID > 25) {
+  if (currentUserID >= 25) {
     currentUserID = 0;
   }
   currentUserID++;
