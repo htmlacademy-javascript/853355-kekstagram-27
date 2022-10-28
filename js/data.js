@@ -74,6 +74,7 @@ const createPost = () => ({
 const getPosts = () => Array.from({length: POSTS_COUNT}, () => createPost());
 
 isInputLengthOk('', 5);
-getPosts();
+
+export {getPosts};
 
 

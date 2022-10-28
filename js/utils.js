@@ -2,7 +2,7 @@ let currentCommentID = 0;
 let currentUserID = 0;
 
 function getUniqueID() {
-  if (currentUserID > 25) {
+  if (currentUserID >= 25) {
     currentUserID = 0;
   }
   currentUserID++;
@@ -22,8 +22,6 @@ function getRandomInt(min, max) {
 const getRandomArrayElement = (elements) => (
   elements[getRandomInt(0, elements.length - 1)]
 );
-
-
 
 function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
