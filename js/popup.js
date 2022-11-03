@@ -11,7 +11,7 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
   comment.innerHTML =
-   '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>'
+   '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>';
   comment.classList.add('social__comment');
 
   comment.querySelector('.social__picture').src = avatar;
@@ -21,11 +21,15 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-const onPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    hidePopup();
-  }
+const renderComments = (comments) => {
+  commentsList.innerHTML = '';
+  const fragment = document.createDocumentFragment();
+  comments.forEach((comment) => {
+    const commentElement = createComment(comment);
+    fragment.append(commentElement);
+  });
+
+  commentsList.append(fragment);
 };
 
 const renderPostDetails = ({url, likes, description}) => {
@@ -47,17 +51,6 @@ const showPopup = (data) => {
   renderComments(data.comments);
 };
 
-const renderComments = (comments) => {
-  commentsList.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-  comments.forEach((comment) => {
-    const commentElement = createComment(comment);
-    fragment.append(commentElement);
-  });
-
-  commentsList.append(fragment);
-};
-
 const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -69,18 +62,11 @@ pictureDialogClose.addEventListener('click', () => {
   hidePopup();
 });
 
-
-// Needs delegation
-for (var i = 0; i < pictures.length; i++) {
-  pictures[i].addEventListener('click', () => {
-    showPopup();
-  });
+const onPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    hidePopup();
+  }
 };
 
-export {showPopup}
-
-
-
-
-
-
+export {showPopup};
