@@ -1,7 +1,6 @@
 import { isEscapeKey } from './utils.js';
 
 const pictureDialog = document.querySelector('.big-picture');
-const pictures = document.querySelectorAll('.picture__img');
 const pictureDialogClose = document.querySelector('.big-picture__cancel');
 const body = document.querySelector('body');
 const commentsList = document.querySelector('.social__comments');
@@ -39,6 +38,20 @@ const renderPostDetails = ({url, likes, description}) => {
   pictureDialog.querySelector('.social__caption').textContent = description;
 };
 
+const hidePopup = () => {
+  pictureDialog.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
+
+const onPopupEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    hidePopup();
+  }
+};
+
 const showPopup = (data) => {
   pictureDialog.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -51,22 +64,10 @@ const showPopup = (data) => {
   renderComments(data.comments);
 };
 
-const hidePopup = () => {
-  pictureDialog.classList.add('hidden');
-  body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onPopupEscKeydown);
-};
-
 pictureDialogClose.addEventListener('click', () => {
   hidePopup();
 });
 
-const onPopupEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    hidePopup();
-  }
-};
+
 
 export {showPopup};

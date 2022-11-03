@@ -20,8 +20,8 @@ const createPost = (data) => {
     showPopup(data);
   });
 
-  return userPostElement
-}
+  return userPostElement;
+};
 
 const renderPosts = (posts) => {
   const fragment = document.createDocumentFragment();
