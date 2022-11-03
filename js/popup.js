@@ -38,12 +38,6 @@ const renderPostDetails = ({url, likes, description}) => {
   pictureDialog.querySelector('.social__caption').textContent = description;
 };
 
-const hidePopup = () => {
-  pictureDialog.classList.add('hidden');
-  body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onPopupEscKeydown());
-};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -62,6 +56,13 @@ const showPopup = (data) => {
 
   renderPostDetails(data);
   renderComments(data.comments);
+};
+
+const hidePopup = () => {
+  pictureDialog.classList.add('hidden');
+  body.classList.remove('modal-open');
+
+  document.removeEventListener('keydown', onPopupEscKeydown());
 };
 
 pictureDialogClose.addEventListener('click', () => {
