@@ -42,7 +42,7 @@ const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
 
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('keydown', onPopupEscKeydown());
 };
 
 const onPopupEscKeydown = (evt) => {
@@ -67,7 +67,5 @@ const showPopup = (data) => {
 pictureDialogClose.addEventListener('click', () => {
   hidePopup();
 });
-
-
 
 export {showPopup};
