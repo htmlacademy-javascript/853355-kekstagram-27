@@ -13,9 +13,10 @@ const createComment = ({avatar, name, message}) => {
    '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>';
   comment.classList.add('social__comment');
 
-  comment.querySelector('.social__picture').src = avatar;
-  comment.querySelector('.social__picture').alt = name;
+  const commentPicture = comment.querySelector('.social__picture');
   comment.querySelector('.social__text').textContent = message;
+  commentPicture.src = avatar;
+  commentPicture.alt = name;
 
   return comment;
 };
@@ -32,12 +33,12 @@ const renderComments = (comments) => {
 };
 
 const renderPostDetails = ({url, likes, description}) => {
-  pictureDialog.querySelector('.big-picture__img img').src = url;
-  pictureDialog.querySelector('.big-picture__img img').alt = description;
+  const bigPicture = pictureDialog.querySelector('.big-picture__img img');
   pictureDialog.querySelector('.likes-count').textContent = likes;
   pictureDialog.querySelector('.social__caption').textContent = description;
+  bigPicture.src = url;
+  bigPicture.alt = description;
 };
-
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -46,7 +47,7 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const showPopup = (data) => {
+const showPopup = (postData) => {
   pictureDialog.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsCount.classList.add('hidden');
@@ -54,15 +55,15 @@ const showPopup = (data) => {
 
   document.addEventListener('keydown', onPopupEscKeydown);
 
-  renderPostDetails(data);
-  renderComments(data.comments);
+  renderPostDetails(postData);
+  renderComments(postData.comments);
 };
 
 const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
 
-  document.removeEventListener('keydown', onPopupEscKeydown());
+  document.removeEventListener('keydown', onPopupEscKeydown);
 };
 
 pictureDialogClose.addEventListener('click', () => {
