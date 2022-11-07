@@ -11,10 +11,11 @@ const usersPosts = getPosts();
 const createPost = (data) => {
   const {comments, description, likes, url} = data;
   const userPostElement = userPostTemplate.cloneNode(true);
-  userPostElement.querySelector('.picture__img').src = url;
-  userPostElement.querySelector('.picture__img').alt = description;
+  const userPostElementImg = userPostElement.querySelector('.picture__img');
   userPostElement.querySelector('.picture__comments').textContent = comments.length;
   userPostElement.querySelector('.picture__likes').textContent = likes;
+  userPostElementImg.src = url;
+  userPostElementImg.alt = description;
 
   userPostElement.addEventListener('click', () => {
     showPopup(data);

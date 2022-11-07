@@ -10,13 +10,8 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
   comment.innerHTML =
-   '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>';
+   `<img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35"><p class="social__text">${message}</p>`;
   comment.classList.add('social__comment');
-
-  comment.querySelector('.social__picture').src = avatar;
-  comment.querySelector('.social__picture').alt = name;
-  comment.querySelector('.social__text').textContent = message;
-
   return comment;
 };
 
@@ -32,21 +27,27 @@ const renderComments = (comments) => {
 };
 
 const renderPostDetails = ({url, likes, description}) => {
-  pictureDialog.querySelector('.big-picture__img img').src = url;
-  pictureDialog.querySelector('.big-picture__img img').alt = description;
+  const bigPicture = pictureDialog.querySelector('.big-picture__img img');
   pictureDialog.querySelector('.likes-count').textContent = likes;
   pictureDialog.querySelector('.social__caption').textContent = description;
+  bigPicture.src = url;
+  bigPicture.alt = description;
 };
 
+const hidePopup = () => {
+  pictureDialog.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     hidePopup();
+    document.removeEventListener('keydown', onPopupEscKeydown);
   }
 };
 
-const showPopup = (data) => {
+const showPopup = (postData) => {
   pictureDialog.classList.remove('hidden');
   body.classList.add('modal-open');
   commentsCount.classList.add('hidden');
@@ -54,15 +55,8 @@ const showPopup = (data) => {
 
   document.addEventListener('keydown', onPopupEscKeydown);
 
-  renderPostDetails(data);
-  renderComments(data.comments);
-};
-
-const hidePopup = () => {
-  pictureDialog.classList.add('hidden');
-  body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onPopupEscKeydown());
+  renderPostDetails(postData);
+  renderComments(postData.comments);
 };
 
 pictureDialogClose.addEventListener('click', () => {
