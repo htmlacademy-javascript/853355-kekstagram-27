@@ -10,14 +10,8 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
   comment.innerHTML =
-   '<img class="social__picture" src="" alt="" width="35" height="35"><p class="social__text"></p>';
+   `<img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35"><p class="social__text">${message}</p>`;
   comment.classList.add('social__comment');
-
-  const commentPicture = comment.querySelector('.social__picture');
-  comment.querySelector('.social__text').textContent = message;
-  commentPicture.src = avatar;
-  commentPicture.alt = name;
-
   return comment;
 };
 
@@ -44,6 +38,7 @@ const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     hidePopup();
+    document.removeEventListener('keydown', onPopupEscKeydown);
   }
 };
 
@@ -62,8 +57,6 @@ const showPopup = (postData) => {
 const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
-
-  document.removeEventListener('keydown', onPopupEscKeydown);
 };
 
 pictureDialogClose.addEventListener('click', () => {
