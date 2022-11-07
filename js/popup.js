@@ -34,6 +34,11 @@ const renderPostDetails = ({url, likes, description}) => {
   bigPicture.alt = description;
 };
 
+const hidePopup = () => {
+  pictureDialog.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
+
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -52,11 +57,6 @@ const showPopup = (postData) => {
 
   renderPostDetails(postData);
   renderComments(postData.comments);
-};
-
-const hidePopup = () => {
-  pictureDialog.classList.add('hidden');
-  body.classList.remove('modal-open');
 };
 
 pictureDialogClose.addEventListener('click', () => {
