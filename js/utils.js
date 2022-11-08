@@ -27,4 +27,6 @@ function isInputLengthOk (input, maxLength) {
   return input.length <= maxLength;
 }
 
-export {getUniqueID, getCommentID, getRandomInt, getRandomArrayElement, isInputLengthOk, currentUserID};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getUniqueID, getCommentID, getRandomInt, getRandomArrayElement, isInputLengthOk, currentUserID, isEscapeKey};
