@@ -1,5 +1,5 @@
 import { getPosts } from './data.js';
-import {showPopup} from './popup.js';
+import {showPopup} from './big-picture.js';
 
 const postsContainer = document.querySelector('.pictures');
 const userPostTemplate = document.querySelector('#picture')
