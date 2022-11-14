@@ -17,13 +17,6 @@ const hideOverlay = () => {
   uploadImg.value = null;
 };
 
-const showOverlay = () => {
-  imgOverlay.classList.remove('hidden');
-  body.classList.add('modal-open');
-  cancelBtn.addEventListener('click', hideOverlay);
-  document.addEventListener('keydown', onPopupEscKeydown);
-};
-
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -35,6 +28,15 @@ const onPopupEscKeydown = (evt) => {
     }
   }
 };
+
+const showOverlay = () => {
+  imgOverlay.classList.remove('hidden');
+  body.classList.add('modal-open');
+  cancelBtn.addEventListener('click', hideOverlay);
+  document.addEventListener('keydown', onPopupEscKeydown);
+};
+
+
 
 uploadImg.addEventListener('input', showOverlay);
 
