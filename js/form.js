@@ -15,21 +15,20 @@ const hideOverlay = () => {
   body.classList.remove('modal-open');
   cancelBtn.removeEventListener('click', hideOverlay);
   uploadImg.value = null;
-}
+};
 
 const showOverlay = () => {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   cancelBtn.addEventListener('click', hideOverlay);
   document.addEventListener('keydown', onPopupEscKeydown);
-
-}
+};
 
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     if (hashtagsInput === document.activeElement || descriptionInput === document.activeElement) {
-      console.log('Cant close. Have focus.');
+      evt.stopPropagation();
     } else {
       hideOverlay();
       document.removeEventListener('keydown', onPopupEscKeydown);
@@ -37,11 +36,10 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-uploadImg.oninput = showOverlay;
+uploadImg.addEventListener('input', showOverlay);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
-
   checkForm();
 });
 
