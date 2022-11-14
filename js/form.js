@@ -36,8 +36,6 @@ const showOverlay = () => {
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-
-
 uploadImg.addEventListener('input', showOverlay);
 
 form.addEventListener('submit', (evt) => {
