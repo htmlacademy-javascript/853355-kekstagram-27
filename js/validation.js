@@ -15,7 +15,7 @@ const containsDuplicates = (array) => {
 const checkLength = (tagsArray) => {
   if (tagsArray.length <= 5) {
     return true;
-  };
+  }
   return false;
 };
 
@@ -24,7 +24,7 @@ const allTagsValid = (tag) => regex.test(tag);
 const checkForm = () => {
   const tags = hashtagInput.value.trimEnd().split(' ');
 
-  const allChecks = [checkLength(tags),  !containsDuplicates(tags), tags.every(allTagsValid)];
+  const allChecks = [checkLength(tags), !containsDuplicates(tags), tags.every(allTagsValid)];
   const isTrue = (fun) => fun === true;
   return allChecks.every(isTrue);
 };
