@@ -1,3 +1,4 @@
 import './posts.js';
-import './popup.js';
+import './big-picture.js';
+import './form.js';
 
