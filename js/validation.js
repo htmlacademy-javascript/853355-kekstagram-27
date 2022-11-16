@@ -4,29 +4,22 @@ const regex = /^#[a-zа-яё0-9\s]{1,19}$/;
 
 const containsDuplicates = (array) => {
   const result = array.some((element) => {
-    if (array.indexOf(element) !== array.lastIndexOf(element)) {
-      return true;
-    }
-    return false;
-  });
+    return array.indexOf(element) !== array.lastIndexOf(element) ? true : false;
+    });
   return result;
 };
 
 const checkLength = (tagsArray) => {
-  if (tagsArray.length <= 5) {
-    return true;
-  }
-  return false;
+  return tagsArray.length <= 5 ? true : false;
 };
 
-const allTagsValid = (tag) => regex.test(tag);
+const isTagValid = (tag) => regex.test(tag);
 
 const checkForm = () => {
   const tags = hashtagInput.value.trimEnd().split(' ');
 
-  const allChecks = [checkLength(tags), !containsDuplicates(tags), tags.every(allTagsValid)];
-  const isTrue = (fun) => fun === true;
-  return allChecks.every(isTrue);
+  const allChecks = [checkLength(tags), !containsDuplicates(tags), tags.every(isTagValid)];
+  return allChecks.every((fun) => fun);
 };
 
 export {checkForm};
