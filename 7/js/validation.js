@@ -2,31 +2,17 @@ const hashtagInput = document.querySelector('.text__hashtags');
 
 const regex = /^#[a-zа-яё0-9\s]{1,19}$/;
 
-const containsDuplicates = (array) => {
-  const result = array.some((element) => {
-    if (array.indexOf(element) !== array.lastIndexOf(element)) {
-      return true;
-    }
-    return false;
-  });
-  return result;
-};
+const containsDuplicates = (array) => array.some((element) => array.indexOf(element) !== array.lastIndexOf(element));
 
-const checkLength = (tagsArray) => {
-  if (tagsArray.length <= 5) {
-    return true;
-  }
-  return false;
-};
+const checkLength = (tagsArray) => tagsArray.length <= 5;
 
-const allTagsValid = (tag) => regex.test(tag);
+const isTagValid = (tag) => regex.test(tag);
 
 const checkForm = () => {
   const tags = hashtagInput.value.trimEnd().split(' ');
 
-  const allChecks = [checkLength(tags), !containsDuplicates(tags), tags.every(allTagsValid)];
-  const isTrue = (fun) => fun === true;
-  return allChecks.every(isTrue);
+  const allChecks = [checkLength(tags), !containsDuplicates(tags), tags.every(isTagValid)];
+  return allChecks.every((fun) => fun);
 };
 
 export {checkForm};
