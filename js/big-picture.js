@@ -13,7 +13,8 @@ const visibleComments = (comments) => {
 
   const checkVisibleCommentsCount = () => {
     if (comments.childNodes.length < visibleCommentsCount) {
-       return visibleCommentsCount = comments.childNodes.length;
+      visibleCommentsCount = comments.childNodes.length;
+      return visibleCommentsCount;
     }
   };
 
@@ -29,11 +30,11 @@ const visibleComments = (comments) => {
   const showSomeComments = (num) => {
     checkVisibleCommentsCount();
     checkLoader();
-    for (var i = 0; i < num; i++) {
+    for (let i = 0; i < num; i++) {
       if ( allComments[i].classList.contains('hidden')) {
         allComments[i].classList.remove('hidden');
       }
-    };
+    }
   };
 
   commentsLoader.addEventListener('click', () => {
@@ -49,7 +50,7 @@ const visibleComments = (comments) => {
   checkVisibleCommentsCount();
   commentsCount.innerHTML = `${visibleCommentsCount} из <span class="comments-count">${comments.childNodes.length}</span> комментариев`;
   showSomeComments(visibleCommentsCount);
-}
+};
 
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
