@@ -39,4 +39,4 @@ const resetScale = () => {
 minusButton.addEventListener('click', onMinusButtonClick);
 plusButton.addEventListener('click', onPlusButtonClick);
 
-export {resetScale}
+export {resetScale};

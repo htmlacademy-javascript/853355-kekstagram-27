@@ -10,7 +10,7 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const COMMENT_COUNT = 5;
 let commetMultiplier = 1;
 
-const showMoreComments = () => {
+const visibleCommentsHandler = () => {
   const allComments = document.querySelectorAll('.social__comment');
   const allCommentsArray = Array.from(allComments);
 
@@ -19,11 +19,11 @@ const showMoreComments = () => {
     currentCommentsCount = allCommentsArray.length;
   }
 
-  if (currentCommentsCount > allCommentsArray.length || currentCommentsCount == allCommentsArray.length) {
+  if (currentCommentsCount > allCommentsArray.length || currentCommentsCount === allCommentsArray.length) {
     commentsLoader.classList.add('hidden');
   }
 
-  const visibleCommentsArray =  allCommentsArray.slice(0, currentCommentsCount);
+  const visibleCommentsArray = allCommentsArray.slice(0, currentCommentsCount);
 
   commentsCount.innerHTML = `${currentCommentsCount} из <span class="comments-count">${allCommentsArray.length}</span> комментариев`;
 
@@ -31,14 +31,12 @@ const showMoreComments = () => {
     if (element.classList.contains('hidden')) {
       element.classList.remove('hidden');
     }
-  })
+  });
 
   commetMultiplier++;
 };
 
-commentsLoader.addEventListener('click', function() {
-  showMoreComments();
-});
+commentsLoader.addEventListener('click', visibleCommentsHandler);
 
 const resetComments = () => {
   commetMultiplier = 1;
@@ -94,7 +92,7 @@ const showPopup = (postData) => {
 
   renderPostDetails(postData);
   renderComments(postData.comments);
-  showMoreComments();
+  visibleCommentsHandler();
 };
 
 pictureDialogClose.addEventListener('click', () => {

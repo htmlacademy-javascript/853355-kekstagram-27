@@ -3,7 +3,7 @@ import { checkForm } from './validation.js';
 import { resetScale } from './scale.js';
 
 const imageInput = document.querySelector('#upload-file');
-const imagePreview = document.querySelector('#imagePreview')
+const imagePreview = document.querySelector('#imagePreview');
 const form = document.querySelector('.img-upload__form');
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
