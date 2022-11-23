@@ -10,52 +10,40 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const COMMENT_COUNT = 5;
 let commetMultiplier = 1;
 
-const visibleComments = () => {
+const showMoreComments = () => {
   const allComments = document.querySelectorAll('.social__comment');
   const allCommentsArray = Array.from(allComments);
-  console.log('Total n of comments: ' + allCommentsArray.length);
 
+  let currentCommentsCount = COMMENT_COUNT * commetMultiplier;
+  if (currentCommentsCount > allCommentsArray.length) {
+    currentCommentsCount = allCommentsArray.length;
+  }
 
-  const showMoreComments = () => {
-    let currentCommentsCount = COMMENT_COUNT * commetMultiplier;
-    console.log('currentCommentsCount 1 ' + currentCommentsCount);
-    if (currentCommentsCount > allCommentsArray.length) {
-      currentCommentsCount = allCommentsArray.length;
-      console.log('currentCommentsCount 2 ' + currentCommentsCount);
+  if (currentCommentsCount > allCommentsArray.length || currentCommentsCount == allCommentsArray.length) {
+    commentsLoader.classList.add('hidden');
+  }
+
+  const visibleCommentsArray =  allCommentsArray.slice(0, currentCommentsCount);
+
+  commentsCount.innerHTML = `${currentCommentsCount} из <span class="comments-count">${allCommentsArray.length}</span> комментариев`;
+
+  visibleCommentsArray.forEach((element) => {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden');
     }
+  })
 
-    if (currentCommentsCount > allCommentsArray.length || currentCommentsCount == allCommentsArray.length) {
-      commentsLoader.classList.add('hidden');
-    }
-
-    const visibleCommentsArray =  allCommentsArray.slice(0, currentCommentsCount);
-    console.log('currentCommentsCount 3 ' + currentCommentsCount);
-
-    commentsCount.innerHTML = `${currentCommentsCount} из <span class="comments-count">${allCommentsArray.length}</span> комментариев`;
-
-    visibleCommentsArray.forEach((element) => {
-      if (element.classList.contains('hidden')) {
-        element.classList.remove('hidden');
-      }
-    })
-
-    commetMultiplier++;
-    console.log('commetMultiplier: ' + commetMultiplier);
-  };
-
-  showMoreComments();
-
-  commentsLoader.addEventListener('click', function() {
-    showMoreComments();
-    console.log('click');
-  });
-
+  commetMultiplier++;
 };
+
+commentsLoader.addEventListener('click', function() {
+  showMoreComments();
+});
 
 const resetComments = () => {
   commetMultiplier = 1;
   commentsLoader.classList.remove('hidden');
-}
+};
 
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
@@ -106,7 +94,7 @@ const showPopup = (postData) => {
 
   renderPostDetails(postData);
   renderComments(postData.comments);
-  visibleComments();
+  showMoreComments();
 };
 
 pictureDialogClose.addEventListener('click', () => {
