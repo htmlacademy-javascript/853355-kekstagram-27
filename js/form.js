@@ -1,7 +1,9 @@
 import { isEscapeKey } from './utils.js';
 import { checkForm } from './validation.js';
+import { resetScale } from './scale.js';
 
-const uploadImg = document.querySelector('#upload-file');
+const imageInput = document.querySelector('#upload-file');
+const imagePreview = document.querySelector('#imagePreview');
 const form = document.querySelector('.img-upload__form');
 const imgOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -14,7 +16,8 @@ const hideOverlay = () => {
   imgOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   cancelBtn.removeEventListener('click', hideOverlay);
-  uploadImg.value = null;
+  resetScale();
+  imageInput.value = null;
 };
 
 const onPopupEscKeydown = (evt) => {
@@ -29,14 +32,16 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-const showOverlay = () => {
+const onImageInputChange = () => {
   imgOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   cancelBtn.addEventListener('click', hideOverlay);
   document.addEventListener('keydown', onPopupEscKeydown);
+  imagePreview.src = URL.createObjectURL(imageInput.files[0]);
 };
 
-uploadImg.addEventListener('input', showOverlay);
+
+imageInput.addEventListener('change', onImageInputChange);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();

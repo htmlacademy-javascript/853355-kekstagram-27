@@ -7,11 +7,48 @@ const commentsList = document.querySelector('.social__comments');
 const commentsCount = document.querySelector('.social__comment-count');
 const commentsLoader = document.querySelector('.social__comments-loader');
 
+const COMMENT_COUNT = 5;
+let commetMultiplier = 1;
+
+const visibleCommentsHandler = () => {
+  const allComments = document.querySelectorAll('.social__comment');
+  const allCommentsArray = Array.from(allComments);
+
+  let currentCommentsCount = COMMENT_COUNT * commetMultiplier;
+  if (currentCommentsCount > allCommentsArray.length) {
+    currentCommentsCount = allCommentsArray.length;
+  }
+
+  if (currentCommentsCount > allCommentsArray.length || currentCommentsCount === allCommentsArray.length) {
+    commentsLoader.classList.add('hidden');
+  }
+
+  const visibleCommentsArray = allCommentsArray.slice(0, currentCommentsCount);
+
+  commentsCount.innerHTML = `${currentCommentsCount} из <span class="comments-count">${allCommentsArray.length}</span> комментариев`;
+
+  visibleCommentsArray.forEach((element) => {
+    if (element.classList.contains('hidden')) {
+      element.classList.remove('hidden');
+    }
+  });
+
+  commetMultiplier++;
+};
+
+commentsLoader.addEventListener('click', visibleCommentsHandler);
+
+const resetComments = () => {
+  commetMultiplier = 1;
+  commentsLoader.classList.remove('hidden');
+};
+
 const createComment = ({avatar, name, message}) => {
   const comment = document.createElement('li');
   comment.innerHTML =
    `<img class="social__picture" src="${avatar}" alt="${name}" width="35" height="35"><p class="social__text">${message}</p>`;
   comment.classList.add('social__comment');
+  comment.classList.add('hidden');
   return comment;
 };
 
@@ -22,7 +59,6 @@ const renderComments = (comments) => {
     const commentElement = createComment(comment);
     fragment.append(commentElement);
   });
-
   commentsList.append(fragment);
 };
 
@@ -37,6 +73,7 @@ const renderPostDetails = ({url, likes, description}) => {
 const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
+  resetComments();
 };
 
 const onPopupEscKeydown = (evt) => {
@@ -50,13 +87,12 @@ const onPopupEscKeydown = (evt) => {
 const showPopup = (postData) => {
   pictureDialog.classList.remove('hidden');
   body.classList.add('modal-open');
-  commentsCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
 
   document.addEventListener('keydown', onPopupEscKeydown);
 
   renderPostDetails(postData);
   renderComments(postData.comments);
+  visibleCommentsHandler();
 };
 
 pictureDialogClose.addEventListener('click', () => {
