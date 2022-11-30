@@ -1,4 +1,4 @@
-import { getPosts } from './data.js';
+// import { getPosts } from './data.js';
 import {showPopup} from './big-picture.js';
 
 const postsContainer = document.querySelector('.pictures');
@@ -6,7 +6,7 @@ const userPostTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const usersPosts = getPosts();
+// const usersPosts = getPosts();
 
 const createPost = (data) => {
   const {comments, description, likes, url} = data;
@@ -34,5 +34,7 @@ const renderPosts = (posts) => {
   postsContainer.append(fragment);
 };
 
-renderPosts(usersPosts);
+// renderPosts(usersPosts);
+
+export {renderPosts};
 

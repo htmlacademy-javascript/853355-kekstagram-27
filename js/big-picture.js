@@ -36,8 +36,6 @@ const visibleCommentsHandler = () => {
   commetMultiplier++;
 };
 
-
-
 const resetComments = () => {
   commetMultiplier = 1;
   commentsLoader.classList.remove('hidden');
