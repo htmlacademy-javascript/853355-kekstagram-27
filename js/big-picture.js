@@ -36,8 +36,6 @@ const visibleCommentsHandler = () => {
   commetMultiplier++;
 };
 
-commentsLoader.addEventListener('click', visibleCommentsHandler);
-
 const resetComments = () => {
   commetMultiplier = 1;
   commentsLoader.classList.remove('hidden');
@@ -74,6 +72,7 @@ const hidePopup = () => {
   pictureDialog.classList.add('hidden');
   body.classList.remove('modal-open');
   resetComments();
+  commentsLoader.removeEventListener('click', visibleCommentsHandler);
 };
 
 const onPopupEscKeydown = (evt) => {
@@ -89,14 +88,13 @@ const showPopup = (postData) => {
   body.classList.add('modal-open');
 
   document.addEventListener('keydown', onPopupEscKeydown);
+  commentsLoader.addEventListener('click', visibleCommentsHandler);
 
   renderPostDetails(postData);
   renderComments(postData.comments);
   visibleCommentsHandler();
 };
 
-pictureDialogClose.addEventListener('click', () => {
-  hidePopup();
-});
+pictureDialogClose.addEventListener('click', hidePopup);
 
 export {showPopup};
