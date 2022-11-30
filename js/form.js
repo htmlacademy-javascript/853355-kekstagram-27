@@ -1,6 +1,7 @@
 import { isEscapeKey } from './utils.js';
 import { checkForm } from './validation.js';
 import { resetScale } from './scale.js';
+import { resetEffects } from './effect.js';
 
 const imageInput = document.querySelector('#upload-file');
 const imagePreview = document.querySelector('#imagePreview');
@@ -17,6 +18,7 @@ const hideOverlay = () => {
   body.classList.remove('modal-open');
   cancelBtn.removeEventListener('click', hideOverlay);
   resetScale();
+  resetEffects();
   imageInput.value = null;
 };
 
